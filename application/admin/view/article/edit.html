@@ -1,0 +1,174 @@
+{extend name="public/base"/}
+{block name="css"}
+<link rel="stylesheet"href="/static/lib/icheck/skins/minimal/red.css" />
+{/block}
+{block name="title"}
+文章编辑
+{/block}
+{block name="content"}
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>&nbsp;文章管理
+            </li>
+            <li>文章编辑</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+    <!-- Page Body -->
+    <div class="page-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="widget radius-bordered">
+                    <div class="widget-header bordered-bottom bordered-themeprimary">
+                        <span class="widget-caption">文章编辑</span>
+                    </div>
+                    <div class="widget-body">
+                        <form class="form-horizontal" enctype="multipart/form-data" id="form1">
+                            <input type="hidden" name="id" value="{$articles.id}">
+                            <div class="form-group">
+                                <label for="title" class="control-label col-sm-2">文章标题</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="文章标题" value="{$articles.title}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="author" class="control-label col-sm-2">作者</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="author" name="author" placeholder="作者" value="{$articles.author}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cate_id" class="control-label col-sm-2">所属栏目</label>
+                                <div class="col-sm-2">
+                                    <select name="cate_id" class="form-control" id="cate_id">
+                                        <option value="">请选择</option>
+                                        {volist name="cates" id="vo"}
+                                        <option value="{$vo.id}" name="cate_id" {eq name="vo.id" value="$articles.cate_id"} selected="selected" {/eq}>{$vo.catename}</option>
+                                        {/volist}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">标签</label>
+                                <div class="col-sm-6 input-group">
+                                    {volist name="labels" id="vo"}
+                                    <label class="checkbox-inline i-checks" id="blog">
+                                        <input type="checkbox" class="i-checks" name="label_id[]" value="{$vo.id}" {in name="vo.id" value="$label_id"}checked{/in}>{$vo.labelname}
+                                    </label>
+                                    {/volist}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pic" class="control-label col-sm-2">缩略图</label><br>
+                                {if $articles.thumbnail}
+                                <div class="col-sm-2">
+                                    <img src="/uploads/{$articles.thumbnail}" alt="thumbnail" class="img-thumbnail">
+                                    <hr>
+                                    <input type="file" id="pic" name="pic">
+                                </div>
+                                {else /}
+                                <div class="col-sm-2">
+                                    <p style="color: #ff8f32;">暂无图片</p>
+                                    <input type="file" id="pic" name="pic">
+                                </div>
+                                {/if}
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">是否展示：</label>
+                                <div class="col-sm-6 input-group">
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="radio" class="i-checks" name="is_show" value="1" {eq name="$articles.is_show" value="1"}checked{/eq}> 是
+                                    </label>
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="radio" class="i-checks" name="is_show" value="0" {eq name="$articles.is_show" value="0"}checked{/eq}> 否
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">是否置顶：</label>
+                                <div class="col-sm-6 input-group">
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="radio" class="i-checks" name="is_top" value="1" {eq name="$articles.is_top" value="1"}checked{/eq}> 是
+                                    </label>
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="radio" class="i-checks" name="is_top" value="0" {eq name="$articles.is_top" value="0"}checked{/eq}> 否
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group" >
+                                <label for="content" class="control-label col-sm-2">文章内容</label>
+                                <div class="col-sm-6">
+                                    <textarea name="content" id="content" cols="30" rows="10">{$articles.content}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-6">
+                                    <button class="btn btn-primary" id="articleEdit">编辑</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+{/block}
+{block name="js_src"}
+<script src="/static/lib/ueditor/ueditor.config.js"></script>
+<script src="/static/lib/ueditor/ueditor.all.min.js"></script>
+<script src="/static/lib/icheck/icheck.min.js" ></script>
+{/block}
+{block name="js"}
+<script>
+    //SyntaxHighlighter.all();
+    $(function () {
+        UE.getEditor('content', {
+            initialFrameWidth : 950,
+            initialFrameHeight: 350
+        });
+        $(".i-checks").iCheck({
+            checkboxClass: 'icheckbox_minimal-red',
+            radioClass: 'iradio_minimal-red',
+            labelHover: true,
+        });
+
+        $("#articleEdit").click(function () {
+            var form=document.getElementById("form1");
+            var fd =new FormData(form);
+            $.ajax({
+                url: "{:url('admin/article/edit')}",
+                type: 'post',
+                data: fd,
+                contentType: false,   // 告诉jQuery不要去设置Content-Type请求头
+                processData: false,  // 告诉jQuery不要去处理发送的数据
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == 1) {
+                        layer.msg(data.msg, {
+                            icon: 6,
+                            time: 1000
+                        }, function () {
+                            location.href = data.url;
+                        });
+                    } else {
+                        layer.open({
+                            icon: 5,
+                            anim: 6,
+                            title: '文章编辑',
+                            content: data.msg
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+{/block}

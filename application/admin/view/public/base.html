@@ -24,7 +24,7 @@
         <div class="navbar-container">
             <!-- Navbar Barnd -->
             <div class="navbar-header pull-left">
-                <a href="#" class="navbar-brand">
+                <a href="{:url('admin/index/index')}" class="navbar-brand">
                     <small style="line-height: 40px;">h1ml管理后台</small>
                 </a>
             </div>
@@ -60,8 +60,8 @@
                                 </li>
                                 <!--Avatar Area-->
                                 <li class="edit">
-                                    <a href="profile.html" class="pull-left">个人资料</a>
-                                    <a href="#" class="pull-right">个人设置</a>
+                                    <a href="{:url('admin/index/lst')}" class="pull-left">个人资料</a>
+                                    <a href="{:url('admin/index/lst')}" class="pull-right">个人设置</a>
                                 </li>
                                 <!--Theme Selector Area-->
                                 <li class="theme-area">
@@ -131,7 +131,7 @@
                 </li>
                 <li>
                     <a href="{:url('admin/cate/lst')}" class="menu-dropdown">
-                        <i class="menu-icon glyphicon glyphicon glyphicon-th"></i>
+                        <i class="menu-icon glyphicon glyphicon glyphicon-th-list"></i>
                         <span class="menu-text">栏目管理</span>
                         <i class="menu-expand"></i>
                     </a>
@@ -149,38 +149,38 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" class="menu-dropdown">
+                    <a href="{:url('admin/article/lst')}" class="menu-dropdown">
                         <i class="menu-icon glyphicon glyphicon glyphicon-book"></i>
                         <span class="menu-text">文章管理</span>
                         <i class="menu-expand"></i>
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="#">
+                            <a href="{:url('admin/article/lst')}">
                                 <span class="menu-text">文章列表</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{:url('admin/article/add')}">
                                 <span class="menu-text">文章添加</span>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="{:url('admin/tags/lst')}" class="menu-dropdown">
-                        <i class="menu-icon glyphicon glyphicon glyphicon-book"></i>
+                    <a href="{:url('admin/label/lst')}" class="menu-dropdown">
+                        <i class="menu-icon glyphicon glyphicon-tags"></i>
                         <span class="menu-text">标签管理</span>
                         <i class="menu-expand"></i>
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="{:url('admin/tags/lst')}">
+                            <a href="{:url('admin/label/lst')}">
                                 <span class="menu-text">标签列表</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{:url('admin/tags/add')}">
+                            <a href="{:url('admin/label/add')}">
                                 <span class="menu-text">标签添加</span>
                             </a>
                         </li>
@@ -206,26 +206,59 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#" class="menu-dropdown">
+                    <a href="{:url('admin/index/lst')}" class="menu-dropdown">
                         <i class="menu-icon glyphicon glyphicon glyphicon-send"></i>
                         <span class="menu-text">管理员管理</span>
                         <i class="menu-expand"></i>
                     </a>
                     <ul class="submenu">
                         <li>
-                            <a href="#">
+                            <a href="{:url('admin/index/lst')}">
                                 <span class="menu-text">管理员列表</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{:url('admin/index/add')}">
                                 <span class="menu-text">管理员添加</span>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{:url('admin/chat/lst')}" class="menu-dropdown">
+                        <i class="menu-icon glyphicon glyphicon glyphicon-comment"></i>
+                        <span class="menu-text">随言碎语</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a href="{:url('admin/chat/lst')}">
+                                <span class="menu-text">随言碎语列表</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{:url('admin/chat/add')}">
+                                <span class="menu-text">随言碎语添加</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{:url('admin/trash/lst')}" class="menu-dropdown">
+                        <i class="menu-icon glyphicon glyphicon glyphicon-trash"></i>
+                        <span class="menu-text">回收站</span>
+                        <i class="menu-expand"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li>
+                            <a href="{:url('admin/trash/lst')}">
+                                <span class="menu-text">回收站列表</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{:url('admin/system/sys')}">
                         <i class="menu-icon glyphicon glyphicon-cog"></i>
                         <span class="menu-text">系统设置</span>
                     </a>
@@ -251,6 +284,8 @@
 <!--Beyond Scripts-->
 <script src="/static/admin/js/beyond.js"></script>
 <script src="/static/lib/layer/layer.js"></script>
+<!--icheck-->
+<script src="/static/admin/js/icheck.min.js"></script>
 {block name="js_src"}{/block}
 {block name="js"}{/block}
 <script>

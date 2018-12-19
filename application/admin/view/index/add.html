@@ -1,0 +1,89 @@
+{extend name="public/base"/}
+{block name="title"}
+管理员添加
+{/block}
+{block name="content"}
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-home"></i>&nbsp;管理员管理
+            </li>
+            <li>
+                管理员添加
+            </li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+    <!-- Page Body -->
+    <div class="page-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="widget radius-bordered">
+                    <div class="widget-header bordered-bottom bordered-themeprimary">
+                        <span class="widget-caption">管理员添加</span>
+                    </div>
+                    <div class="widget-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="username" class="col-sm-2 control-label no-padding-right">管理员名称</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="username" placeholder="管理员名称" name="username"/>
+                                    <p class="help-block">请输入管理员名称</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="col-sm-2 control-label no-padding-right">密码</label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control" id="password" placeholder="密码" name="password"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary" id="adminAdd">添加</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+{/block}
+{block name="js"}
+<script>
+    $(function () {
+        $("#adminAdd").click(function () {
+            $.ajax({
+                url: "{:url('admin/index/add')}",
+                type: 'post',
+                data: $('form').serialize(),
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == 1) {
+                        layer.msg(data.msg, {
+                            icon: 6,
+                            time: 1000
+                        }, function () {
+                            location.href = data.url;
+                        });
+                    } else {
+                        layer.open({
+                            icon: 5,
+                            anim: 6,
+                            title: '管理员添加',
+                            content: data.msg
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    })
+</script>
+{/block}

@@ -1,0 +1,133 @@
+{extend name="public/base" /}
+{block name="title"}
+{$articleInfo.title}--h1ml
+{/block}
+{block name="css"}
+<link rel="stylesheet" href="/static/lib/syntaxhighlighter/styles/shCore.css">
+<link rel="stylesheet" href="/static/lib/syntaxhighlighter/styles/shThemeEclipse.css">
+{/block}
+{include file="public/login"}
+{block name="content"}
+<section id="portfolio" style="visibility: visible; animation-name: fadeInUp;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-lg-8">
+                <div class="panel" data-scroll-reveal="enter top and move 50px over 0.6s">
+                    <div class="panel-body">
+                        <div class="blog" style="overflow: auto;">
+                            <ol class="breadcrumb">
+                                <li><a href="{:url('index/index/index')}">首页</a></li>
+                                <li>{$articleInfo.title}</li>
+                                <input type="hidden" id="id" value="${data.info.id}">
+                            </ol>
+                            <p>
+                                <span class="count"><i class="glyphicon glyphicon-user"></i><a href="#">{$articleInfo.author}</a></span>
+                                <span class="count"><i class="glyphicon glyphicon-eye-open"></i>阅读:{$articleInfo.browse_num}</span>
+                                <span class="count"><i class="glyphicon glyphicon-comment"></i>评论:</span>
+                                <span class="cy_cmt_count">{$articleInfo.comment_num}</span>
+                                <span class="count"><i class="glyphicon glyphicon-time">{$articleInfo.create_time}</i></span>
+                                <a id="full" href="JavaScript:full()" class=" hidden-xs hidden-sm" style="float:right;">全屏查看</a>
+                            </p>
+
+                            <div class="post-footer">
+                                <ul class="article-tag-list">
+                                    {volist name="$articleInfo.label" id="vo1"}
+                                    <li class="tagitem"><a class="article-tag-list-link " href="#">{$vo1.labelname}</a></li>
+                                    {/volist}
+                                </ul>
+                            </div>
+                        <div class="post-single-content">{$articleInfo.content|raw}</div>
+                    </div>
+                    <div class="keywords">
+                        <blockquote class="layui-elem-quote">
+                            <p>
+                                <strong>转载请注明来源：</strong>
+                                <script type="text/javascript">
+                                    document.write(window.location.href);
+                                </script>
+                            </p>
+                        </blockquote>
+                    </div>
+                    <div class="bdsharebuttonbox">
+                        <a href="#" class="bds_more" data-cmd="more">分享到：</a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友">QQ好友</a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a><a href="#" class="bds_print" data-cmd="print" title="分享到打印">打印</a>
+                    </div>
+                    <script>
+                        window._bd_share_config = {
+                            "common" : {
+                                "bdSnsKey" : {},
+                                "bdText" : "",
+                                "bdMini" : "2",
+                                "bdMiniList" : false,
+                                "bdPic" : "https://cdn.blog.techauch.com/upload/blogImg/1525415173145.png",
+                                "bdStyle" : "0",
+                                "bdSize" : "16"
+                            },
+                            "share" : {
+                                "bdSize" : 16
+                            }
+                        };
+                       /* with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = '/static/api/js/share.js?v=89860593.js?cdnversion='+ ~(-new Date() / 36e5)];*/
+                    </script>
+
+                </div>
+
+            </div>
+            <div id="cyReward" role="cylabs" data-use="reward" style="text-align: center;"></div>
+        </div>
+        <div id="b-public-right" class=" hidden-xs hidden-sm hidden-md">
+            {include file="public/introduction"}
+            {include file="public/contact"}
+            {include file="public/hot"}
+            {include file="public/tags"}
+            {include file="public/friendshipLink"}
+        </div>
+        <div class="col-xs-12 col-md-12 col-lg-8">
+            <div class="commentbox" id="commentId">
+					<textarea cols="80" rows="50" placeholder="有什么疑问，来说几句吧......"
+                              class="mytextarea" id="content"></textarea>
+                <div class="btn btn-info pull-right" id="comment" >评论</div>
+            </div>
+            <div class="comment-list"></div>
+        </div>
+    </div>
+    </div>
+</section>
+{/block}
+{block name="js_src"}
+<script src="/static/lib/syntaxhighlighter/src/shCore.js"></script>
+<script src="/static/lib/syntaxhighlighter/scripts/shBrushPhp.js"></script>
+<script src="/static/lib/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script src="/static/lib/syntaxhighlighter/scripts/shBrushSql.js"></script>
+<script src="/static/lib/syntaxhighlighter/scripts/shBrushCss.js"></script>
+<script src="/static/lib/syntaxhighlighter/scripts/shBrushCpp.js"></script>
+<script src="/static/lib/syntaxhighlighter/scripts/shBrushPython.js"></script>
+<script src="/static/lib/ueditor/ueditor.parse.js"></script>
+{/block}
+{block name="js"}
+<script>
+    SyntaxHighlighter.config.strings = {
+
+        expandSource : '展开代码',
+
+        viewSource : '查看代码',
+
+        copyToClipboard : '复制代码',
+
+        copyToClipboardConfirmation : '代码复制成功',
+
+        print : '打印',
+
+        help: '?',
+
+        alert: '语法高亮\n\n',
+
+        noBrush: '不能找到刷子: ',
+
+        brushNotHtmlScript: '刷子没有配置html-script选项',
+
+        aboutDialog: '<div></div>'
+
+    };
+    SyntaxHighlighter.all();//显示代码高亮
+</script>
+{/block}

@@ -2,9 +2,7 @@
 
 namespace app\admin\controller;
 
-use think\Controller;
-
-class Cate extends Controller
+class Cate extends Base
 {
     // 栏目列表
     public function lst()
@@ -66,7 +64,7 @@ class Cate extends Controller
                 $this->error($result);
             }
         }
-        $cates = Db('cate')->find($id);
+        $cates = model('cate')->find($id);
         $this->assign('cates', $cates);
         return view();
     }
@@ -74,12 +72,17 @@ class Cate extends Controller
     public function del()
     {
         if ($this->request->isAjax()) {
-            $cates = model('Cate')->find(input('post.id'));
-            $result = $cates->delete();
-            if ($result) {
-                $this->success('栏目删除成功');
+            $article_num = model('Article')->where('cate_id', input('post.id'))->count();
+            if (! $article_num) {
+                $cates = model('Cate')->find(input('post.id'));
+                $result = $cates->delete();
+                if ($result) {
+                    $this->success('栏目删除成功');
+                } else {
+                    $this->error('栏目删除失败');
+                }
             } else {
-                $this->error('栏目删除失败');
+                $this->error('请先删除请栏目下的所有文章！！！');
             }
         }
     }

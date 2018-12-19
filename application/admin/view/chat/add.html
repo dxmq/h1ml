@@ -1,6 +1,9 @@
 {extend name="public/base"/}
+{block name="css"}
+<link rel="stylesheet"href="/static/lib/icheck/skins/minimal/red.css" />
+{/block}
 {block name="title"}
-标签添加
+碎语添加
 {/block}
 {block name="content"}
 <!-- Page Content -->
@@ -9,10 +12,10 @@
     <div class="page-breadcrumbs">
         <ul class="breadcrumb">
             <li class="active">
-                <i class="fa fa-home"></i>&nbsp;标签管理
+                <i class="fa fa-home"></i>&nbsp;随言碎语管理
             </li>
             <li>
-                标签添加
+                碎语添加
             </li>
         </ul>
     </div>
@@ -23,20 +26,31 @@
             <div class="col-xs-12">
                 <div class="widget radius-bordered">
                     <div class="widget-header bordered-bottom bordered-themeprimary">
-                        <span class="widget-caption">标签添加</span>
+                        <span class="widget-caption">碎语添加</span>
                     </div>
                     <div class="widget-body">
                         <form class="form-horizontal">
                             <div class="form-group">
-                                <label for="tag" class="col-sm-2 control-label no-padding-right">标签名称</label>
+                                <label for="content" class="col-sm-2 control-label no-padding-right">碎语内容</label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="tag" placeholder="标签名称" name="tag"/>
-                                    <p class="help-block">请输入标签名称</p>
+                                    <input type="text" class="form-control" id="content" placeholder="碎语内容" name="content"/>
+                                    <p class="help-block">请输入碎语内容</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">是否显示：</label>
+                                <div class="col-sm-6 input-group">
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="radio" class="i-checks" name="is_show" value="1" checked> 是
+                                    </label>
+                                    <label class="checkbox-inline i-checks">
+                                        <input type="radio" class="i-checks" name="is_show" value="0"> 否
+                                    </label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-primary" id="tagAdd">添加</button>
+                                    <button type="submit" class="btn btn-primary" id="chatAdd">添加</button>
                                 </div>
                             </div>
                         </form>
@@ -49,12 +63,20 @@
 </div>
 <!-- /Page Content -->
 {/block}
+{block name="js_src"}
+<script src="/static/lib/icheck/icheck.min.js" ></script>
+{/block}
 {block name="js"}
 <script>
     $(function () {
-        $("#tagAdd").click(function () {
+        $(".i-checks").iCheck({
+            checkboxClass: 'icheckbox_minimal-red',
+            radioClass: 'iradio_minimal-red',
+            labelHover: true,
+        });
+        $("#chatAdd").click(function () {
             $.ajax({
-                url: "{:url('admin/tag/add')}",
+                url: "{:url('admin/chat/add')}",
                 type: 'post',
                 data: $('form').serialize(),
                 dataType: 'json',
@@ -70,7 +92,7 @@
                         layer.open({
                             icon: 5,
                             anim: 6,
-                            title: '标签添加',
+                            title: '碎语添加',
                             content: data.msg
                         });
                     }

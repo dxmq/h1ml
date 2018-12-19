@@ -1,0 +1,101 @@
+{extend name="public/base"/}
+{block name="title"}
+标签列表
+{/block}
+{block name="content"}
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-home"></i>&nbsp;标签管理
+            </li>
+            <li>标签列表</li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+    <!-- Page Body -->
+    <div class="page-body">
+        <a href="{:url('admin/label/add')}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>&nbsp;标签添加</a>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="widget">
+                    <div class="widget-header">
+                        <span class="widget-caption">标签列表</span>
+                        <div class="widget-buttons">
+                            {$labels->render()|raw|replace}
+                        </div>
+                    </div>
+                    <div class="widget-body">
+                        <table class="table table-hover table-bordered">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>标签名称</th>
+                                <th>添加时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {volist name="labels" id="vo"}
+                            <tr id="label_tr_{$vo.id}">
+                                <td>{$vo.id}</td>
+                                <td>{$vo.labelname}</td>
+                                <td>{$vo.create_time}</td>
+                                <td>
+                                    <a href="{:url('admin/label/edit', ['id'=>$vo.id])}" class="btn btn-azure btn-xs">编辑</a>
+                                    <a href="#" class="btn btn-danger btn-xs label-del" dataid="{$vo.id}">删除</a>
+                                </td>
+                            </tr>
+                            {/volist}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+{/block}
+{block name="js"}
+<script>
+    $(function () {
+        $(".label-del").click(function () {
+            var id = $(this).attr('dataid');
+            layer.confirm('确定要删除吗？', {
+                icon: 3,
+                title: '标签删除'
+            }, function (index) {
+                layer.close(index);
+                $.ajax({
+                    url: "{:url('admin/label/del')}",
+                    type: 'post',
+                    data: {id:id},
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.code == 1) {
+                            layer.msg(data.msg, {
+                                icon: 6,
+                                time: 1000
+                            }, function () {
+                                $("#label_tr_"+id).remove();
+                            });
+                        } else {
+                            layer.open({
+                                icon: 5,
+                                anim: 6,
+                                title: '标签删除',
+                                content: data.msg
+                            });
+                        }
+                    }
+                });
+            });
+            return false;
+        });
+    });
+</script>
+{/block}

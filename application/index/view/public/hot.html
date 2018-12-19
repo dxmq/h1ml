@@ -1,0 +1,16 @@
+<div class="frame friendLink"
+	data-scroll-reveal=" enter from the left after 0.2s">
+	<h2 class="member">热门文章</h2>
+	<ul class="hot_ul">
+		{volist name="hot_articles" id="vo"}
+		<li>
+			<b>
+				<a href="{:url('index/article/detail', ['id'=>$vo.id])}" target="">{if mb_strlen($vo.title)< 22}{$vo.title}{else /}{$vo.title|mulsubstr=22}...{/if}</a>
+			</b> 
+			<p>
+				{if mb_strlen($vo.view_content) > 65}{$vo.view_content|mulsubstr=65}...{else /}{$vo.view_content}{/if}
+			</p>
+		</li>
+		{/volist}
+	</ul>
+</div>

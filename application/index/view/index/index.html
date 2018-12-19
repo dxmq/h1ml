@@ -1,0 +1,97 @@
+{extend name="public/base"/}
+{block name="title"}
+h1ml
+{/block}
+
+{block name="content"}
+<section id="portfolio" style="visibility: visible; animation-name: fadeInUp;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-lg-8">
+                <div class="panel  contenttop" data-scroll-reveal="enter from the top after 0.1s" style="border-color: #ddd">
+                    <a href="{:url('index/article/detail', ['id'=>$topArticle.id])}" > <strong>博主置顶</strong>
+                        <h3 class="title">{$topArticle.title}</h3>
+                        <p class="overView">{$topArticle.view_content}...</p>
+                    </a>
+                </div>
+                <div class="contentIndex">
+                    <h3 class="post-header">
+                        <a href='{:url("index/index/index")}'>最新文章</a></h3>
+                    <div class="panel-body">
+                        <!--文章列表开始-->
+                        <div class="contentList">
+                            {volist name="articles" id="vo"}
+                            <div class="panel panel-default"  data-scroll-reveal="enter top and move 50px over 0.6s">
+                                <div class="panel-body" >
+                                    <h4><a class="title"  target="_self" title="{$vo.title}" href="{:url('index/article/detail', ['id'=>$vo.id])}">{$vo.title}</a></h4>
+                                    {if $vo.thumbnail}
+                                    <div class="article-left hidden-xs hidden-sm tpic">
+                                        <img class="lazy-load" data-original="/uploads/{$vo.thumbnail}" alt="{$vo.title}" src="/uploads/{$vo.thumbnail}" alt="{$vo.title}" >
+                                    </div>
+                                    {/if}
+                                    <div class="article-right">
+											<span class="comment_a comments hidden-xs hidden-sm">{$vo.view_content}...
+											</span>
+                                        <a href="{:url('index/article/detail', ['id'=>$vo.id])}"  target="_self" title="{$vo.title}" class="post-more waves-effect waves-button">[阅读更多]</a>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <p>
+                                        <span class="count"><i class="glyphicon glyphicon-user"></i><a href="#">{$vo.author}</a></span>
+                                        <span class="count"> <i class="glyphicon glyphicon-tags" ></i>
+                                            {volist name="$vo.label" id="vo1"}
+                                            <a href="" style="color: #3e9ee5">{$vo1.labelname}</a>
+                                            {if count($vo.label) != $i}
+                                            <i class="gang">/</i>
+                                            {/if}
+                                            {/volist}
+                                        </span>
+                                        <span class="count"><i class="glyphicon glyphicon-time"></i>{$vo.create_time}</span>
+
+                                        <span class="count"><i class="glyphicon glyphicon-eye-open"></i>阅读:{$vo.browse_num}</span>
+
+                                        <span class="count"><i class="glyphicon glyphicon-comment"></i>评论: <i class="cy_cmt_count">{$vo.comment_num}</i></span>
+                                    </p>
+                                </div>
+                            </div>
+                            {/volist}
+                            <!--文章列表结束-->
+
+                        </div>
+                        {if count($articles) == 0}
+                        <div class="col-md-4 col-sm-6 col-xs-12" style="height: 520px;text-align: center;">
+                            <h2>暂无</h2>
+                        </div>
+                        {/if}
+                        <hr class="bottom-line-2">
+                    </div>
+                </div>
+                <div id="pageTool" style="margin: 40px 0">
+                    <div id="paging" class="ui-paging-container text-center">
+                        {$articles->render()|raw}
+                    </div>
+                </div>
+            </div>
+            <div id="b-public-right" class="hidden-xs hidden-sm hidden-md">
+                {include file="public/search"}
+                {include file="public/introduction"}
+                {include file="public/ChatRoom"}
+                {include file="public/contact"}
+                {include file="public/hot"}
+                {include file="public/tags"}
+                {include file="public/friendshipLink"}
+            </div>
+        </div>
+    </div>
+</section>
+{/block}
+{block name="js"}
+<script type="text/javascript">
+    $(document).ready(function() {
+        FastClick.attach(document.body);
+        $("img").lazyload({
+            effect : "fadeIn"
+        });
+    });
+    window.scrollReveal = new scrollReveal();
+</script>
+{/block}

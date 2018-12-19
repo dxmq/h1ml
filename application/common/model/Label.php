@@ -5,38 +5,44 @@ namespace app\common\model;
 use think\Model;
 use think\model\concern\SoftDelete;
 
-class Tags extends Model
+class Label extends Model
 {
+    // 软删除
     use SoftDelete;
+
+    // 关联文章
+    public function article()
+    {
+        return $this->belongsToMany('Article', 'article_label', 'article_id', 'label_id');
+    }
     // 标签添加
     public function add($data)
     {
-        $validate = new \app\common\validate\Tag();
+        $validate = new \app\common\validate\Label();
         if (! $validate->scene('add')->check($data)) {
             return $validate->getError();
         }
         $result = $this->allowField(TRUE)->save($data);
-        if ($result) {
+        if ($result)
             return 1;
-        } else {
+        else
             return '标签添加失败';
-        }
     }
-
+    
     // 标签修改
     public function edit($data)
     {
-        $validate = new \app\common\validate\Tag();
+        $validate = new \app\common\validate\Label();
         if (! $validate->scene('edit')->check($data)) {
             return $validate->getError();
         }
-        $tags = $this->find($data['id']);
-        $tags->tag = $data['tags'];
-        $result = $tags->allowField(TRUE)->save();
+        $labels = $this->findOrEmpty($data['id']);
+        $labels->labelname = $data['labelname'];
+        $result = $labels->allowField(TRUE)->save();
         if ($result) {
             return 1;
         } else {
-            return '标签添加失败';
+            return '标签修改失败';
         }
     }
 }

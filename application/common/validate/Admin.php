@@ -14,6 +14,7 @@ use think\Validate;
 class Admin extends Validate
 {
     protected $rule = [
+        'id' => 'require|number',
         '__token__' => 'token',
         'username|用户名' => 'require|length:2,15|unique:admin',
         'password|密码' => 'require',
@@ -23,5 +24,15 @@ class Admin extends Validate
     public function sceneLogin()
     {
         return $this->only(['username', 'password', 'captcha']);
+    }
+
+    public function sceneAdd()
+    {
+        return $this->only(['username', 'password']);
+    }
+
+    public function sceneEdit()
+    {
+        return $this->only(['id', 'username', 'password']);
     }
 }

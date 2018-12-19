@@ -1,0 +1,54 @@
+{extend name="public/base"}
+{block name="title"}
+h1ml博客-归档
+{/block}
+{block name="content"}
+<section id="portfolio" style="visibility: visible; animation-name: fadeInUp;">
+    <div class="container">
+        <div class="row" style="background-color: white;">
+            <h3 class="post-header">
+                <a href='#'><i>2018年-12月</i></a>
+            </h3>
+        </div>
+        {volist name="trace" id="vo"}
+        <div class="row" style="background-color: white;">
+            <div class="col-md-4 ">
+                <div class="col-md-4 ">
+                    <ul>
+                        <li style="background-color: #eaeaea;"><span>{$vo.create_time|date="Y年-m月-d日"}</span> »</li>
+                        <ul >
+                            <li data-scroll-reveal="enter from the left after 0.1s"><a href="#" title="" target="_self">{$vo.author}发布了一篇文章《{$vo.title}》</a></li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {/volist}
+    </div>
+<div id="pageTool" style="margin: 40px 0">
+    <div id="paging" class="ui-paging-container text-center">
+        {$trace->render()|raw}
+    </div>
+</div>
+</section>
+{/block}
+</body>
+{block name="js_src"}
+<script src="/static/index/js/shake.js"></script>
+{/block}
+{block name="js"}
+<script type="text/javascript">
+    $('#portfolio ul a').shake();
+    $(document).ready(function() {
+        $("#record>a").removeClass("aDefault");
+        $("#record>a").addClass("active");
+        //添加分页位置的被点击后的样式
+        var index =1;
+        if(GetQueryString("page_no")!=null){
+            index = GetQueryString("page_no");
+        }
+        $('.focus').text(index+"/"+$(".total_page").val());
+    });
+    window.scrollReveal = new scrollReveal();
+</script>
+{/block}}

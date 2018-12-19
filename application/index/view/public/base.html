@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="h1ml,博客,IT,程序员,个人博客,论坛" />
+    <meta name="description" content="code life是一个技术交流的论坛，提供了一个交流和分享技术经验的论坛社区平台！" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+    <link rel="icon" href="/static/index/img/favicon.ico" type="image/x-icon" />
+-->
+    <link rel="stylesheet" type="text/css" href="/static/index/css/pages.css">
+    <link rel="stylesheet" type="text/css" href="/static/index/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/static/index/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/index/css/style.css">
+<!--
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700' rel='stylesheet' type='text/css'>
+-->
+    <link rel="stylesheet" href="/static/lib/web/main.css" />
+    {block name="css"}{/block}
+    <title>{block name="title"}{/block}</title>
+</head>
+<body>
+{include file="public/top"}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel"
+                    style="text-align: center;">免注册登录</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <span class="login_method">登录方式：</span>
+                    <ul>
+                        <li><a href="#" target="_blank" title="QQ"><img
+                                src="/static/index/img/QQ.png"></a></li>
+                        <li><a href="#" target="_blank" title="百度"><img
+                                src="/static/index/img/baidu.png"></a></li>
+                        <li><a href="#" target="_blank" title="微博"><img
+                                src="/static/index/img/sinaweibo.png"></a></li>
+                        <li><a href="#" target="_blank" title="GitHub"><img
+                                src="/static/index/img/github.png"></a></li>
+                        <li><a href="#" target="_blank" title="CSDN"><img
+                                src="/static/index/img/csdn.png"></a></li>
+                    </ul>
+                    <div class="login_other">
+                        <a href="JavaScript:alert('那就真的没有了')">没有我要的登录？</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<canvas></canvas>
+{block name="content"}{/block}
+{include file="public/bottom"}
+</body>
+<!--<script src="https://hm.baidu.com/hm.js?efe374880900f380d2acd649fca2ae7d"></script>
+<script src="https://zz.bdstatic.com/linksubmit/push.js"></script>-->
+<script src="/static/index/js/jquery.min.js"></script>
+<script src="/static/index/js/bootstrap.min.js"></script>
+<script src="/static/index/js/scrollReveal.js"></script>
+<script src="/static/index/js/fastclick.js"></script>
+<script src="/static/index/js/jquery.lazyload.js"></script>
+<script src="/static/index/js/main.js"></script>
+<script src="/static/index/js/chatRoom.js"></script>
+<script src="/static/index/js/default.js"></script>
+<script src="https://cdn.blog.techauch.com/js/scrollReveal.js"></script>
+<script src="/static/lib/web/main.js"></script>
+<script type="text/javascript" color="0,0,255" opacity='0.5' zIndex="-2" count="99" src="https://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+{block name="js_src"}{/block}
+{block name="js"}{/block}
+</html>

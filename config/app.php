@@ -143,4 +143,8 @@ return [
     // 异常处理handle类 留空使用 \think\exception\Handle
     'exception_handle'       => '',
 
+    // 上传文件保存路径
+    'upload_path'               => '../public/uploads',
+    'thumb_width'            => 180,
+    'thumb_height'           => 120
 ];

@@ -1,0 +1,107 @@
+{extend name="public/base"/}
+{block name="title"}
+系统设置
+{/block}
+{block name="content"}
+<!-- Page Content -->
+<div class="page-content">
+    <!-- Page Breadcrumb -->
+    <div class="page-breadcrumbs">
+        <ul class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-home"></i>&nbsp;系统设置
+            </li>
+            <li>
+                设置
+            </li>
+        </ul>
+    </div>
+    <!-- /Page Breadcrumb -->
+    <!-- Page Body -->
+    <div class="page-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="widget radius-bordered">
+                    <div class="widget-header bordered-bottom bordered-themeprimary">
+                        <span class="widget-caption">设置</span>
+                    </div>
+                    <div class="widget-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="webname" class="col-sm-2 control-label no-padding-right">网站名称</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="webname" placeholder="网站名称" name="webname" value="{$systems.webname}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="copyright" class="col-sm-2 control-label no-padding-right">版权信息</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="copyright" placeholder="版权信息" name="copyright" value="{$systems.copyright}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="friendship_link" class="control-label col-sm-2 no-padding-right">友情链接</label>
+                                <div class="col-sm-6">
+                                    <textarea name="friendship_link" id="friendship_link" cols="60" rows="4">{$systems.friendship_link}</textarea>
+                                    <p class="help-block">多个友情链接用","分隔</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="friendship_link" class="control-label col-sm-2 no-padding-right">网站介绍</label>
+                                <div class="col-sm-6">
+                                    <textarea name="web_introduce" id="web_introduce" cols="60" rows="6">{$systems.web_introduce}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact" class="col-sm-2 control-label no-padding-right">联系方式</label>
+                                <div class="col-sm-6">
+                                    <textarea name="contact" id="contact" cols="60" rows="4">{$systems.contact}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary" id="systemAdd">设置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Body -->
+</div>
+<!-- /Page Content -->
+{/block}
+{block name="js"}
+<script>
+    $(function () {
+        $("#systemAdd").click(function () {
+            $.ajax({
+                url: "{:url('admin/system/sys')}",
+                type: 'post',
+                data: $('form').serialize(),
+                dataType: 'json',
+                success: function (data) {
+                    if (data.code == 1) {
+                        layer.msg(data.msg, {
+                            icon: 6,
+                            time: 1000
+                        }, function () {
+                            location.href = data.url;
+                        });
+                    } else {
+                        layer.open({
+                            icon: 5,
+                            anim: 6,
+                            title: '系统设置',
+                            content: data.msg
+                        });
+                    }
+                }
+            });
+            return false;
+        });
+    })
+</script>
+{/block}

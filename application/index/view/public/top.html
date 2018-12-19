@@ -1,0 +1,32 @@
+<div class="header">
+	<header>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse" data-target="#myNavbar"
+							aria-expanded="false">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a href="#"><img src="/static/index/img/logo.png" height="40px" style="margin-top: 5px;"></a>
+				</div>
+				<div class="collapse navbar-collapse collapse" id="myNavbar">
+					<ul class="nav navbar-nav navbar-left" id="column">
+						<li id="main"><a href="{:url('index/index/index')}" {eq name="cate_id" value="index"}class="active"{/eq}class="aDefault">网站首页</a></li>
+						{volist name="cates" id="vo"}
+						<li><a href="{:url('index/column/index', ['id'=>$vo.id])}" {eq name="cate_id" value="$vo.id"}class="active"{else /}class="aDefault"{/eq}>{$vo.catename}</a></li>
+						{/volist}
+						<li id="chat"><a href="{:url('index/chat/chat')}" {eq name="cate_id" value="chat"}class="active"{/eq}class="aDefault">随言碎语</a></li>
+						<li id="archives"><a href="{:url('index/trace/trace')}" {eq name="cate_id" value="archives"}class="active"{/eq}class="aDefault">归档</a></li>
+					</ul>
+					<!--<ul class="nav navbar-nav navbar-right">
+                        <input type="hidden" id="token" value="">
+                       <input type="hidden" id="token" value="">
+                    </#if>
+                    </ul>-->
+				</div>
+			</div>
+		</nav>
+	</header>
+</div>

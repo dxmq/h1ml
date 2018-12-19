@@ -1,0 +1,53 @@
+{extend name="public/base"/}
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="/static/index/css/animate.css">
+{/block}
+{block name="title"}
+随言碎语
+{/block}
+{block name="content"}
+<section id="portfolio" style="visibility: visible; animation-name: fadeInUp;">
+    <div id="b-content" class="container">
+        <div class="row">
+            <!-- 左侧文章开始 -->
+            <div class="col-xs-12 col-md-12 col-lg-8 b-chat">
+                <div class="b-chat-left">
+                    {volist name="chats" id="vo" mod="2"}
+                        {eq name="mod" value="0"}
+                            <ul class="b-chat-one animated bounceInLeft">
+                                <li class="b-chat-title ">{$vo.create_time}</li>
+                                <li class="b-chat-content">{$vo.content}</li>
+                                <div class="b-arrows-right1">
+                                    <div class="b-arrows-round"></div>
+                                </div>
+                                <div class="b-arrows-right2"></div>
+                            </ul>
+                        {/eq}
+                    {/volist}
+                </div>
+                <div class="b-chat-middle"></div>
+                <div class="b-chat-right">
+                    {volist name="chats" id="vo" mod="2"}
+                        {eq name="mod" value="1"}
+                            <ul class="b-chat-one animated bounceInRight">
+                                <li class="b-chat-title ">{$vo.create_time}</li>
+                                <li class="b-chat-content">{$vo.content}</li>
+                                <div class="b-arrows-right1">
+                                    <div class="b-arrows-round"></div>
+                                </div>
+                                <div class="b-arrows-right2"></div>
+                            </ul>
+                        {/eq}
+                    {/volist}
+                </div>
+            </div>
+            <div id="b-public-right" class="hidden-xs hidden-sm hidden-md">
+                {include file="public/search"}
+                {include file="public/tags"}
+            </div>
+        </div>
+    </div>
+</section>
+{/block}
+{block name="js_src"}
+{/block}
