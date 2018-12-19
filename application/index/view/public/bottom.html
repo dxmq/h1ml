@@ -1,0 +1,30 @@
+<div class="back-top-btn  hidden-xs hidden-sm hidden-md" id="backTopBtn"
+	style="display: block;" onclick="javascript:top_hua();">
+	<img src="/static/index/img/backTop_e8b77a0.png" alt="" title="返回顶部">
+</div>
+<section id="footer">
+	<footer>
+		<div class="container" style="margin-bottom: 0px">
+			<div class="row_footer">
+				<p>
+					<a target="_break"
+						href="">&copy; {$webCopyRight} </a>技术支持
+					<a href="#" target="_break">ICAT工作室</a>
+					<a href="https://github.com/dxmq" target="_break">网站源码</a>
+					<a href="#" target="_break">RSS订阅</a>
+				</p>
+					<a target="_blank"
+						href="#"
+						style="text-decoration: none;">
+						<p>{$webCopyRight}</p>
+					</a>
+				<a href="#" target="_blank" title="站长统计">站长统计</a>
+				博客稳定运行：<a id="timer" style="color: #a5a4a4"></a>
+			</div>
+		</div>
+	</footer>
+</section>
+<script>
+	// 上滑
+    function top_hua(){return $("body,html").animate({scrollTop:0},500),!1}
+</script>
