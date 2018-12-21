@@ -2,6 +2,6 @@
 	data-scroll-reveal=" enter from the left after 0.2s">
 	<h2 class="member">标签库</h2>
 	{volist name="label_info" id="vo"}
-	 <a style="color: #42a6f3" href="#">{$vo.labelname}({$vo.article_count})</a>
+	 <a style="color: #42a6f3" href="{:url('index/index/label', ['id'=>$vo.id])}">{$vo.labelname}({$vo.article_count})</a>
 	{/volist}
 </div>

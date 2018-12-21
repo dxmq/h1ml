@@ -17,6 +17,8 @@ class Article extends Base
             'articleInfo' => $articleInfo
         ];
         $read=cookie('read');
+        $read = (array)$read;
+        //dump ($read);die;
         // 判断是否已经记录过article_id
         if (array_key_exists($id, $read)) {
             // 判断点击本篇文章的时间是否已经超过一天
@@ -30,7 +32,7 @@ class Article extends Base
             // 文章点击量+1
             model('Article')->where(array('id'=>$id))->setInc('browse_num',1);
         }
-        cookie('read',$read,864000);
+        cookie('read',$read,86400);
         $this->assign($viewData);
         return view();
     }

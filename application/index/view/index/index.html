@@ -39,7 +39,7 @@ h1ml
                                         <span class="count"><i class="glyphicon glyphicon-user"></i><a href="#">{$vo.author}</a></span>
                                         <span class="count"> <i class="glyphicon glyphicon-tags" ></i>
                                             {volist name="$vo.label" id="vo1"}
-                                            <a href="" style="color: #3e9ee5">{$vo1.labelname}</a>
+                                            <a href="{:url('index/index/label', ['id'=>$vo1.id])}" style="color: #3e9ee5">{$vo1.labelname}</a>
                                             {if count($vo.label) != $i}
                                             <i class="gang">/</i>
                                             {/if}

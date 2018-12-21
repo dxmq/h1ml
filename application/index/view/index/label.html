@@ -10,7 +10,7 @@ h1ml
             <div class="col-xs-12 col-md-12 col-lg-8">
                 <div class="contentIndex">
                     <h3 class="post-header">
-                        <a href="{:url('index/column/index')}">最新文章</a></h3>
+                        <a href="{:url('index/index/label', ['id'=>$label.id])}">{$label.labelname}下的文章</a></h3>
                     <div class="panel-body">
                         <!--文章列表开始-->
                         <div class="contentList">
@@ -32,12 +32,7 @@ h1ml
                                     <p>
                                         <span class="count"><i class="glyphicon glyphicon-user"></i><a href="#">{$vo.author}</a></span>
                                         <span class="count"> <i class="glyphicon glyphicon-tags" ></i>
-                                            {volist name="$vo.label" id="vo1"}
-                                            <a href="{:url('index/index/label', ['id'=>$vo1.id])}" style="color: #3e9ee5">{$vo1.labelname}</a>
-                                            {if count($vo.label) != $i}
-                                            <i class="gang">/</i>
-                                            {/if}
-                                            {/volist}
+                                            <a href="{:url('index/index/label', ['id'=>$label.id])}" style="color: #3e9ee5">{$label.labelname}</a>
                                         </span>
                                         <span class="count"><i class="glyphicon glyphicon-time"></i>{$vo.create_time}</span>
 
@@ -79,22 +74,11 @@ h1ml
 {/block}
 {block name="js"}
 <script type="text/javascript">
-
-
     $(document).ready(function() {
         FastClick.attach(document.body);
         $("img").lazyload({
             effect : "fadeIn"
         });
-        //$("#main>a").removeClass("aDefault");
-        //$("#main>a").addClass("active");
-
-        /*$("#column li").each(function (index) {
-            $(this).click(function () {
-                $("#column li>a").removeClass("aDefault");
-                $("#column li a").eq(index).addClass("active");
-            });
-        });*/
     });
     window.scrollReveal = new scrollReveal();
 </script>

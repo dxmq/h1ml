@@ -55,7 +55,7 @@ class Label extends Base
     {
         if ($this->request->isAjax()) {
             $labels = model('label')->find(input('post.id'));
-            $result = $labels->delete();
+            $result = $labels->delete(TRUE);
             if ($result) {
                 $this->success('标签删除成功');
             } else {

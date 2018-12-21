@@ -165,6 +165,9 @@
                             content: data.msg
                         });
                     }
+                },
+                error: function () {
+                    location.href = "{:url('admin/article/lst')}";
                 }
             });
             return false;

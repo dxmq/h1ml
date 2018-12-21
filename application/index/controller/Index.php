@@ -29,4 +29,25 @@ class Index extends Base
         $this->assign($viewData);
         return view();
     }
+
+    public function label($id)
+    {
+        // 标签下的所有文章显示
+        // 查询出所有的文章Id
+        $articleLabel = model('ArticleLabel')->field('article_id')->distinct('article_id')->where('label_id', $id)->select();
+        $article_id = [];
+        foreach ($articleLabel as $k => $v) {
+            $article_id[] = $v['article_id'];
+        }
+        // 查询出所有的文章
+        $articles = model('Article')->where('id', 'in', $article_id)->paginate(10);
+        $label = model('Label')->find($id);
+        $viewData = [
+            'cate_id' => 'index',
+            'label' => $label,
+            'articles' => $articles
+        ];
+        $this->assign($viewData);
+        return view();
+    }
 }

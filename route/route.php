@@ -44,6 +44,10 @@ Route::group('admin', function() {
 
    // 系统设置相关
    Route::rule('systemsys', 'admin/system/sys', 'get|post');
+   // 回收站
+    Route::rule('recyclelst', 'admin/recycle/lst', 'get');
+    Route::rule('recover', 'admin/recycle/recover', 'post');
+    Route::rule('delete', 'admin/recycle/delete', 'post');
 
 });
 
@@ -54,3 +58,4 @@ Route::rule("column/[:id]", 'index/column/index', 'get');
 Route::rule("article/detail/[:id]", 'index/article/detail', 'get');
 Route::rule("archives", 'index/trace/trace', 'get');
 Route::rule("broken_words", 'index/chat/chat', 'get');
+Route::rule("label/[:id]", 'index/index/label', 'get');

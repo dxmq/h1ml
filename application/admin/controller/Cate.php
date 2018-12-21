@@ -75,7 +75,7 @@ class Cate extends Base
             $article_num = model('Article')->where('cate_id', input('post.id'))->count();
             if (! $article_num) {
                 $cates = model('Cate')->find(input('post.id'));
-                $result = $cates->delete();
+                $result = $cates->delete(TRUE);
                 if ($result) {
                     $this->success('栏目删除成功');
                 } else {

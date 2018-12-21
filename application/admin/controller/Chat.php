@@ -58,7 +58,7 @@ class Chat extends Controller
     {
         if ($this->request->isAjax()) {
             $chats = model('Chat')->find(input('post.id'));
-            $result = $chats->delete();
+            $result = $chats->delete(TRUE);
             if ($result) {
                 $this->success('碎语删除成功');
             } else {
