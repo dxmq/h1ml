@@ -50,4 +50,22 @@ class Index extends Base
         $this->assign($viewData);
         return view();
     }
+
+    // 搜索
+    public function search()
+    {
+        $keywords = trim(input('param'));
+        $where[] = ['title', 'like', '%'.$keywords.'%'];
+        $articles = model('Article')
+            ->field('content,delete_time,update_time,is_show,is_top', TRUE)
+            ->where($where)->order('create_time', 'desc')
+            ->paginate('10');
+        $viewData = [
+            'articles' => $articles,
+            'cate_id' => 'index',
+            'keywords' => $keywords,
+        ];
+        $this->assign($viewData);
+        return view('search');
+    }
 }

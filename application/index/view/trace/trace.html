@@ -39,16 +39,6 @@ h1ml博客-归档
 {block name="js"}
 <script type="text/javascript">
     $('#portfolio ul a').shake();
-    $(document).ready(function() {
-        $("#record>a").removeClass("aDefault");
-        $("#record>a").addClass("active");
-        //添加分页位置的被点击后的样式
-        var index =1;
-        if(GetQueryString("page_no")!=null){
-            index = GetQueryString("page_no");
-        }
-        $('.focus').text(index+"/"+$(".total_page").val());
-    });
     window.scrollReveal = new scrollReveal();
 </script>
 {/block}}

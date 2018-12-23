@@ -8,14 +8,6 @@ h1ml
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-12 col-lg-8">
-                {if $topArticle}
-                <div class="panel  contenttop" data-scroll-reveal="enter from the top after 0.1s" style="border-color: #ddd">
-                    <a href="{:url('index/article/detail', ['id'=>$topArticle.id])}" > <strong>博主置顶</strong>
-                        <h3 class="title">{$topArticle.title}</h3>
-                        <p class="overView">{$topArticle.view_content}...</p>
-                    </a>
-                </div>
-                {/if}
                 <div class="contentIndex">
                     <h3 class="post-header">
                         <a href='{:url("index/index/index")}'>最新文章</a></h3>
@@ -76,8 +68,8 @@ h1ml
             <div id="b-public-right" class="hidden-xs hidden-sm hidden-md">
                 {include file="public/search"}
                 {include file="public/introduction"}
-<!--                {include file="public/ChatRoom"}
-                {include file="public/contact"}-->
+                {include file="public/ChatRoom"}
+                {include file="public/contact"}
                 {include file="public/hot"}
                 {include file="public/tags"}
                 {include file="public/friendshipLink"}
