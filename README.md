@@ -1,1 +1,7 @@
-tp5.1做的一个简易博客，主要用于记录在学习中遇到的问题和有生活的一些感悟。
+thinkphp5.1框架写的一个简易的博客。
+
+前台：
+![index](https://i.imgur.com/VR3MHnw.png)
+
+后台：
+![admin](https://i.imgur.com/5zrdqv7.png)
