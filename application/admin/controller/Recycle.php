@@ -45,7 +45,9 @@ class Recycle extends Base
             if ($thumb) {
                 unlink(config('upload_path') . '/' . $thumb);
             }
-            $res = \app\common\model\Article::destroy(input('post.id', true));
+            $articles = \app\common\model\Article::onlyTrashed()->find(input('post.id'));
+            $res = $articles->delete(true);
+            //$res = \app\common\model\Article::destroy(input('post.id', true));
             if ($res) {
                 $this->success('彻底删除成功');
             } else {

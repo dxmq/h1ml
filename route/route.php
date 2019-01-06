@@ -52,10 +52,12 @@ Route::group('admin', function() {
 });
 
 // 前台
-Route::rule('index', 'index/index/index', 'get');
+// Route::rule('index', 'index/index/index', 'get');
 Route::rule('/', 'index/index/index', 'get');
-Route::rule("column/[:id]", 'index/column/index', 'get');
-Route::rule("article/detail/[:id]", 'index/article/detail', 'get');
-Route::rule("archives", 'index/trace/trace', 'get');
-Route::rule("broken_words", 'index/chat/chat', 'get');
-Route::rule("label/[:id]", 'index/index/label', 'get');
+Route::rule('column/[:id]', 'index/column/index', 'get');
+Route::rule('article/detail/[:id]', 'index/article/detail', 'get');
+Route::rule('archives', 'index/trace/trace', 'get');
+Route::rule('broken_words', 'index/chat/chat', 'get');
+Route::rule('label/[:id]', 'index/index/label', 'get');
+Route::rule('search', 'index/index/search', 'get');
+Route::miss('public/404.html');

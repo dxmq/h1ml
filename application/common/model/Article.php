@@ -137,12 +137,8 @@ class Article extends Model
     public function articleLabelAdd($articleFields)
     {
         if ($articleFields['label_id']) {
-            $result = model('ArticleLabel')->add($articleFields);
-            if ($result) {
-                return 1;
-            } else {
-                return '添加文章失败';
-            }
+            model('ArticleLabel')->add($articleFields);
+            return 1;
         } else {
             return 1;
         }
