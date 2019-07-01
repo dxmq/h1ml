@@ -27,7 +27,7 @@ class Index extends Base
     // 管理员列表
     public function lst()
     {
-        $adminInfo = Db('Admin')->where('delete_time', '')->paginate(10);
+        $adminInfo = Db('Admin')->paginate(10);
         $viewData = [
             'adminInfo' => $adminInfo
         ];

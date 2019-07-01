@@ -18,7 +18,7 @@ class Admin extends Model
             return $validate->getError();
         unset($data['captcha']);
         $adminInfo = Db::table('zc_admin')->where('username', $data['username'])->findOrEmpty();
-        if ($adminInfo && $adminInfo['password'] == $data['password']) {
+        if ($adminInfo && $adminInfo['password'] == $this->addSaltToPassword($data['password'])) {
             $sessionData = [
                 'id' => $adminInfo['id'],
                 'username' => $adminInfo['username']
@@ -37,7 +37,7 @@ class Admin extends Model
             return $validate->getError();
         }
         $this->username = $data['username'];
-        $this->password = $data['password'];
+        $this->password = $this->addSaltToPassword($data['password']);
         $result = $this->save();
         if ($result) {
             return 1;
@@ -53,14 +53,17 @@ class Admin extends Model
         if (! $validate->scene('edit')->check($data)) {
             return $validate->getError();
         }
-        $adminInfo = $this->find($data['id']);
-        $adminInfo->username = $data['username'];
-        $adminInfo->password = $data['password'];
-        $result = $adminInfo->save();
+        $data['password'] = $this->addSaltToPassword($data['password']);
+        $result = $this->update($data);
         if ($result) {
             return 1;
         } else {
             return '管理员编辑失败';
         }
+    }
+
+    private function addSaltToPassword($password)
+    {
+        return md5($password . '_ThinkPHP');
     }
 }

@@ -24,7 +24,7 @@ class Article extends Model
 
     /**
      * @param $file
-     * @param $type add 或 edit
+     * @param $type
      * @param null $article_id
      * @return string
      * @throws \think\db\exception\DataNotFoundException

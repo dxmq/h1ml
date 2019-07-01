@@ -10,7 +10,7 @@ h1ml
             <div class="col-xs-12 col-md-12 col-lg-8">
                 <div class="contentIndex">
                     <h3 class="post-header">
-                        <a href='{:url("index/index/index")}'>最新文章</a></h3>
+                        <a href='{:url("index/index/index")}'>关键词 <span style="color: red">"{$keywords}"</span> 下的文章有：</a></h3>
                     <div class="panel-body">
                         <!--文章列表开始-->
                         <div class="contentList">
@@ -43,7 +43,7 @@ h1ml
 
                                         <span class="count"><i class="glyphicon glyphicon-eye-open"></i>阅读:{$vo.browse_num}</span>
 
-                                        <span class="count"><i class="glyphicon glyphicon-comment"></i>评论: <i class="cy_cmt_count">{$vo.comment_num}</i></span>
+                                        <!--<span class="count"><i class="glyphicon glyphicon-comment"></i>评论: <i class="cy_cmt_count">{$vo.comment_num}</i></span>-->
                                     </p>
                                 </div>
                             </div>
